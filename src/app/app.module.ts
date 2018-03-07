@@ -10,6 +10,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MediaCapture,MediaFile, CaptureError, CaptureImageOptions} from '@ionic-native/media-capture';
+import { Camera,CameraOptions } from '@ionic-native/camera';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+
+
+
 
 @NgModule({
   declarations: [
@@ -34,6 +40,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    MediaCapture,
+    Camera,
+    AndroidPermissions,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

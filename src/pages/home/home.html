@@ -1,17 +1,172 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="danger">
+    <ion-title>Police App</ion-title>
+    <ion-buttons start>
+        <button ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Prev</button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button ion-button icon-right (click)="next()">Next <ion-icon name="arrow-forward"></ion-icon></button>
+      </ion-buttons>
   </ion-navbar>
+  <ion-fab right top>
+  <!-- <a href="tel:999">
+    <button ion-fab color="danger" small>
+
+        <ion-icon name="call"></ion-icon>
+
+    </button>
+    </a> -->
+
+  </ion-fab>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding >
+
+  <ion-slides  #signupSlider pager
+  #slides pager='true' (ionSlideDidChange)="onSlideChanged()"
+   >
+
+   <ion-slide class="swiper-no-swiping">
+
+     <ion-list no-lines>
+
+         <!-- <form> -->
+
+             <ion-item>
+                 <ion-label floating>Headline ( Describe incident briefly..)</ion-label>
+                 <ion-input  type="text" [(ngModel)]="headline"></ion-input>
+
+
+             </ion-item>
+
+             <!-- <ion-item *ngIf="slideTwoForm.controls.username.pending">
+                 <p>Checking username...</p>
+             </ion-item> -->
+
+             <!-- <ion-item *ngIf="!slideTwoForm.controls.username.valid && !slideTwoForm.controls.username.pending && (slideTwoForm.controls.username.dirty || submitAttempt)">
+                 <p>Sorry, that username can not be used!</p>
+             </ion-item> -->
+
+             <ion-item>
+                 <ion-label floating>Select Category</ion-label>
+                 <ion-select [(ngModel)]="category">
+                     <ion-option value="public" checked="true">Rape</ion-option>
+                     <ion-option value="friends">Domestic Violence</ion-option>
+                     <ion-option value="private">Child Abuse</ion-option>
+                 </ion-select>
+             </ion-item>
+
+             <ion-item>
+                 <ion-label floating>What is happening?</ion-label>
+                 <ion-textarea [(ngModel)]="what" type="text" ></ion-textarea>
+             </ion-item>
+
+         <!-- </form> -->
+
+     </ion-list>
+
+
+
+   </ion-slide>
+
+    <ion-slide class="swiper-no-swiping">
+
+      <ion-list no-lines>
+
+          <!-- <form > -->
+
+            <ion-item>
+                <ion-label floating>Where is it happening?</ion-label>
+                <ion-textarea [(ngModel)]="where" type="text" ></ion-textarea>
+            </ion-item>
+
+
+
+            <ion-item>
+                <ion-label floating>Why is it happening?</ion-label>
+                <ion-textarea [(ngModel)]="why" type="text"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Who is involved?</ion-label>
+                <ion-textarea [(ngModel)]="who" type="text"></ion-textarea>
+            </ion-item>
+
+          <!-- </form> -->
+
+      </ion-list>
+
+
+
+    </ion-slide>
+
+    <ion-slide class="swiper-no-swiping">
+
+      <ion-list no-lines>
+
+          <!-- <form > -->
+
+            <ion-item>
+                <ion-label floating>How did it happen?</ion-label>
+                <!-- <ion-input type="text" [(ngModel)]="demo"></ion-input> -->
+                <ion-textarea [(ngModel)]="how" type="text"></ion-textarea>
+            </ion-item>
+
+
+
+            <ion-item>
+                <ion-label floating>When did it happen?</ion-label>
+                <ion-textarea [(ngModel)]="when" type="text"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Phone number</ion-label>
+                <ion-input [(ngModel)]="contact" type="number"></ion-input>
+                <!-- <ion-textarea formControlName="bio"></ion-textarea> -->
+            </ion-item>
+
+          <!-- </form> -->
+
+      </ion-list>
+
+      <button ion-button full color="primary" (click)="reprtCase()" (click)="presentToast()" >Report Activity</button>
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+  <div>
+    <div>
+      <ion-grid>
+   <ion-row>
+     <ion-col col-6 *ngFor="let photo of photos; let id = index">
+       <ion-card class="block">
+       <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+
+       <img [src]="photo" *ngIf="photo" />
+       </ion-card>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+
+    </div>
+    <ion-fab left top mini>
+      <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+
+    </ion-fab>
+
+    <ion-fab center top mini>
+      <button ion-fab color="danger" (click)="selectvideo()"><ion-icon name="play"></ion-icon></button>
+
+    </ion-fab>
+
+    <ion-fab right top mini>
+
+      <button ion-fab color="danger" (click)="takePhoto()"><ion-icon name="camera"></ion-icon></button>
+
+    </ion-fab>
+  </div>
+
+
 </ion-content>

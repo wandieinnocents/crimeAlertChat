@@ -1,3 +1,50 @@
-page-home {
+.ios,.android, .md {
+
+    page-home {
+      //form overlap
+      .scroll-content { padding-bottom: 0!important; }
+      .fab { margin: 8px; width: 40px; height: 40px; line-height: 40px; }
+      //delete pic
+      .block {
+  position: relative;
+  .deleteIcon {
+    position: absolute !important;
+    color: #ffffff !important;
+    margin-left: 80% !important;
+  }
+  .deleteIcon:before {
+    font-size: 30px !important;
+  }
+  }
+  //     .swiper-slide {
+  //   overflow-y: scroll;
+  //   display: block;
+  // }
+    //
+    //     p {
+    //         font-size: 0.8em;
+    //         color: #d2d2d2;
+    //     }
+    //
+    //     .swiper-slide {
+    //         display: block;
+    //         height: 100%;
+    //     }
+    //
+    //     ion-label, .select-text {
+    //         margin-left: 10px;
+    //     }
+    //
+    //     ion-input, ion-select, ion-textarea {
+    //         background-color: #f2f2f2;
+    //         padding: 5px 10px;
+    //     }
+    //
+    //     .invalid {
+    //         border: 1px solid #ea6153;
+    //     }
+    //
+    //
+  }
 
 }
