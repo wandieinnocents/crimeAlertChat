@@ -6,13 +6,20 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+//import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MediaCapture,MediaFile, CaptureError, CaptureImageOptions} from '@ionic-native/media-capture';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireModule  } from 'angularfire2';
+import { FIREBASE_CONFIG } from './app.firebase.config';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import { AuthService } from '../providers/auth/auth.service';
+
 
 
 
@@ -23,11 +30,12 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+  //  TabsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +43,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+  //  TabsPage
   ],
   providers: [
     StatusBar,
@@ -43,8 +51,12 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     MediaCapture,
     Camera,
     AndroidPermissions,
+    AngularFireAuth,
+    Geolocation,
+    AuthService,
 
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+
   ]
 })
 export class AppModule {}

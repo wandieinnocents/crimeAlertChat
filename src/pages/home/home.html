@@ -1,43 +1,59 @@
 <ion-header>
   <ion-navbar color="danger">
-    <ion-title>Police App</ion-title>
-    <ion-buttons start>
-        <button ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Prev</button>
-      </ion-buttons>
-      <ion-buttons end>
-        <button ion-button icon-right (click)="next()">Next <ion-icon name="arrow-forward"></ion-icon></button>
-      </ion-buttons>
+    <ion-title>Crime Alert</ion-title>
+
+
   </ion-navbar>
   <ion-fab right top>
-  <!-- <a href="tel:999">
+
+  <a href="tel:999">
     <button ion-fab color="danger" small>
 
         <ion-icon name="call"></ion-icon>
 
     </button>
-    </a> -->
+    </a>
 
   </ion-fab>
 </ion-header>
 
-<ion-content padding >
+<ion-content  >
+<!-- <ion-card> -->
 
-  <ion-slides  #signupSlider pager
-  #slides pager='true' (ionSlideDidChange)="onSlideChanged()"
-   >
+<div #map  id="map"></div>
+<hr>
+<!-- </ion-card> -->
 
-   <ion-slide class="swiper-no-swiping">
+
+
+
 
      <ion-list no-lines>
 
          <!-- <form> -->
 
-             <ion-item>
-                 <ion-label floating>Headline ( Describe incident briefly..)</ion-label>
+
+               <ion-fab >
+                 <button ion-fab color="danger"><ion-icon name="camera"></ion-icon></button>
+                 <ion-fab-list side="right">
+                   <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+                   <button ion-fab  color="primary"  (click)="takePhoto()"><ion-icon  name="camera"></ion-icon></button>
+                   <button ion-fab><ion-icon  color="primary"  name="logo-vimeo"></ion-icon></button>
+                   <button ion-fab><ion-icon  color="primary"  name="logo-googleplus"></ion-icon></button>
+                 </ion-fab-list>
+               </ion-fab>
+
+               <br>
+               <br>
+
+
+             <!-- <ion-item>
+
+                 <ion-label floating>Headline ( Title of crime briefly..)</ion-label>
                  <ion-input  type="text" [(ngModel)]="headline"></ion-input>
 
 
-             </ion-item>
+             </ion-item> -->
 
              <!-- <ion-item *ngIf="slideTwoForm.controls.username.pending">
                  <p>Checking username...</p>
@@ -67,76 +83,16 @@
 
 
 
-   </ion-slide>
-
-    <ion-slide class="swiper-no-swiping">
-
-      <ion-list no-lines>
-
-          <!-- <form > -->
-
-            <ion-item>
-                <ion-label floating>Where is it happening?</ion-label>
-                <ion-textarea [(ngModel)]="where" type="text" ></ion-textarea>
-            </ion-item>
 
 
 
-            <ion-item>
-                <ion-label floating>Why is it happening?</ion-label>
-                <ion-textarea [(ngModel)]="why" type="text"></ion-textarea>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Who is involved?</ion-label>
-                <ion-textarea [(ngModel)]="who" type="text"></ion-textarea>
-            </ion-item>
-
-          <!-- </form> -->
-
-      </ion-list>
 
 
 
-    </ion-slide>
-
-    <ion-slide class="swiper-no-swiping">
-
-      <ion-list no-lines>
-
-          <!-- <form > -->
-
-            <ion-item>
-                <ion-label floating>How did it happen?</ion-label>
-                <!-- <ion-input type="text" [(ngModel)]="demo"></ion-input> -->
-                <ion-textarea [(ngModel)]="how" type="text"></ion-textarea>
-            </ion-item>
-
-
-
-            <ion-item>
-                <ion-label floating>When did it happen?</ion-label>
-                <ion-textarea [(ngModel)]="when" type="text"></ion-textarea>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Phone number</ion-label>
-                <ion-input [(ngModel)]="contact" type="number"></ion-input>
-                <!-- <ion-textarea formControlName="bio"></ion-textarea> -->
-            </ion-item>
-
-          <!-- </form> -->
-
-      </ion-list>
-
-      <button ion-button full color="primary" (click)="reprtCase()" (click)="presentToast()" >Report Activity</button>
-
-    </ion-slide>
-
-  </ion-slides>
 
 
   <div>
+    <!-- fetch photos -->
     <div>
       <ion-grid>
    <ion-row>
@@ -151,22 +107,29 @@
  </ion-grid>
 
     </div>
-    <ion-fab left top mini>
+    <!-- end of fetch photos -->
+    <!-- <ion-fab left bottom mini>
       <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
 
     </ion-fab>
 
-    <ion-fab center top mini>
+    <ion-fab center bottom mini>
       <button ion-fab color="danger" (click)="selectvideo()"><ion-icon name="play"></ion-icon></button>
 
     </ion-fab>
 
-    <ion-fab right top mini>
+    <ion-fab right bottom mini>
 
       <button ion-fab color="danger" (click)="takePhoto()"><ion-icon name="camera"></ion-icon></button>
 
     </ion-fab>
+
+
+
+
+ -->
   </div>
+
 
 
 </ion-content>

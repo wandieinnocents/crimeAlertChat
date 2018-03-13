@@ -1,11 +1,14 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild, ElementRef} from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { MediaCapture,MediaFile, CaptureError, CaptureImageOptions} from '@ionic-native/media-capture';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { ToastController,AlertController} from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
+
+declare var google;
 
 
 
@@ -37,10 +40,12 @@ export class HomePage {
 
 @ViewChild('myvideo') myVideo: any;
 @ViewChild('signupSlider') signupSlider: any;
+@ViewChild('map') mapElement: ElementRef;
+  map: any;
 // @ViewChild('slides') slides: Slides;
 slideData: number[] = [];
-
-
+marker: any;
+latLng: string;
 
 
   constructor(
@@ -48,7 +53,8 @@ slideData: number[] = [];
     private camera: Camera,
     private mediaCapture: MediaCapture,
     public toastCtrl: ToastController,
-    private alertCtrl : AlertController
+    private alertCtrl : AlertController,
+    private geolocation: Geolocation
 
 
 
@@ -57,7 +63,58 @@ slideData: number[] = [];
 
 
   }
+  ionViewDidLoad(){
 
+      // let loader = this.loadingCtrl.create({
+      //   content: "Please wait...",
+      //   duration: 1000
+      // });
+      // loader.present();
+
+      this.loadMap();
+
+     }
+
+     loadMap(){
+
+       this.geolocation.getCurrentPosition().then((position) => {
+
+
+
+       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+
+
+
+       let mapOptions = {
+         center: latLng,
+         zoom: 17,
+
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+         //mapTypeId: google.maps.MapTypeId.ROADMAP
+
+       }
+
+
+
+       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+       this.marker = new google.maps.Marker({
+       map: this.map,
+       position: latLng ,  //here in marker set the center position
+       //label:"Your Here ",
+       animation: google.maps.Animation.DROP,
+       icon: ''
+     });
+
+       //console.log(position.coords.latitude);
+       console.log('position gotten now: long:',position.coords.latitude,' lat:',position.coords.longitude);
+
+     }, (err) => {
+       console.log(err);
+     });
+
+   }
   //photo classes
   ngOnInit() {
     this.photos = [];
@@ -108,6 +165,7 @@ slideData: number[] = [];
 
   }
 
+
 //permissions
 //toast here
   presentToast() {
@@ -117,6 +175,7 @@ slideData: number[] = [];
       });
       toast.present();
     }
+
 
   onSlideChanged() {
    let currentIndex = this.signupSlider.getActiveIndex();
@@ -194,6 +253,7 @@ reprtCase()
 
   startrecording()
   {
+
     this.mediaCapture.captureVideo((videodata) =>{
       alert(JSON.stringify(videodata));
     })
