@@ -1,0 +1,21 @@
+<ion-card>
+  <ion-card-content>
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Date of Birth</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY"></ion-datetime >
+    </ion-item>
+
+
+  </ion-card-content>
+</ion-card>
+
+<button ion-button color="secondary" (click)="saveProfile()" full>SAVE PROFILE</button>

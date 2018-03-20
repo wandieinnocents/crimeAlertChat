@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { EditProfileComponent } from '../../components/edit-profile/edit-profile';
+import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { ComponentsModule } from '../../components/components.module';
-  
+
 
 
 /**
@@ -20,6 +20,7 @@ import { ComponentsModule } from '../../components/components.module';
 export class EditProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {

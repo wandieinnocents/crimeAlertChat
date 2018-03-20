@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { InboxPage } from '../../pages/inbox/inbox'
-import { ChannelsPage } from '../../pages/channels/channels'
-import { ProfilePage } from '../../pages/profile/profile'
+import { InboxPage } from '../../pages/inbox/inbox';
+import { ChannelsPage } from '../../pages/channels/channels';
+import { ProfilePage } from '../../pages/profile/profile';
+import { HomePage } from '../../pages/home/home';
+
 
 /**
  * Generated class for the TabsPage page.
@@ -19,14 +21,15 @@ import { ProfilePage } from '../../pages/profile/profile'
 })
 export class TabsPage {
 
-tab1Root: string;
+tab1Root: any;
 tab2Root: string;
 tab3Root: string;
-  constructor(  ) {
-
-    this.tab1Root = 'InboxPage';
-    this.tab2Root = 'ChannelsPage';
-    this.tab3Root = 'ProfilePage';
+tab4Root: string;
+  constructor() {
+    this.tab1Root = HomePage;
+    this.tab2Root = 'InboxPage';
+    this.tab3Root = 'ChannelsPage';
+    this.tab4Root = 'ProfilePage';
 
   }
 

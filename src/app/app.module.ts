@@ -29,7 +29,7 @@ import { AuthService } from '../providers/auth/auth.service';
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    HomePage
   //  TabsPage
   ],
   imports: [
@@ -42,7 +42,7 @@ import { AuthService } from '../providers/auth/auth.service';
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    HomePage
   //  TabsPage
   ],
   providers: [
