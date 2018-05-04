@@ -7,7 +7,7 @@
   <ion-fab right top>
 
   <a href="tel:999">
-    <button ion-fab color="danger" small>
+    <button ion-fab color="secondary" small>
 
         <ion-icon name="call"></ion-icon>
 
@@ -30,18 +30,35 @@
 
      <ion-list no-lines>
 
+
+      <!-- <ion-fab left bottom mini>
+      <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+
+    </ion-fab>
+
          <!-- <form> -->
 
+            <ion-fab left  >
+                <button ion-fab  color="secondary" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+              </ion-fab>
+              <!-- recording -->
+               <ion-fab center  >
+                 <!-- <button ion-fab color="danger"><ion-icon name="mic"></ion-icon></button> -->
+                 <button ion-fab color="danger" (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon></button>
+                 <button ion-fab color="danger" (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon></button>
 
-               <ion-fab >
-                 <button ion-fab color="danger"><ion-icon name="camera"></ion-icon></button>
-                 <ion-fab-list side="right">
-                   <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+                 <!-- <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+                 <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button> -->
+                </ion-fab>
+                <!-- end of recording -->
+
+                <ion-fab right  >
                    <button ion-fab  color="primary"  (click)="takePhoto()"><ion-icon  name="camera"></ion-icon></button>
+                  </ion-fab>
                    <!-- <button ion-fab><ion-icon  color="primary"  name="logo-vimeo"></ion-icon></button>
                    <button ion-fab><ion-icon  color="primary"  name="logo-googleplus"></ion-icon></button> -->
-                 </ion-fab-list>
-               </ion-fab>
+
+
 
                <br>
                <br>
@@ -64,23 +81,48 @@
              </ion-item> -->
 
              <ion-item>
+
                  <ion-label floating>Select Category</ion-label>
-                 <ion-select [(ngModel)]="category">
-                     <ion-option value="public" checked="true">Rape</ion-option>
-                     <ion-option value="friends">Domestic Violence</ion-option>
-                     <ion-option value="private">Child Abuse</ion-option>
+
+                 <!-- <ion-select [(ngModel)]="category"> -->
+                    <ion-select [(ngModel)]="title">
+                     <ion-option value="Rape Case" checked="true">Rape</ion-option>
+                     <ion-option value="Domestic Violence">Domestic Violence</ion-option>
+                     <ion-option value="Child Abuse">Child Abuse</ion-option>
+                     <ion-option value="Murder">Murder</ion-option>
+
                  </ion-select>
              </ion-item>
 
              <ion-item>
                  <ion-label floating>What is happening?</ion-label>
-                 <ion-textarea [(ngModel)]="what" type="text" ></ion-textarea>
+                 <!-- <ion-textarea [(ngModel)]="what" type="text" ></ion-textarea> -->
+                 <ion-textarea [(ngModel)]="description" type="text" ></ion-textarea>
+
+
              </ion-item>
+
+             <ion-item>
+              <!--  <ion-label>Today is: {{ date | date: 'longDate' }} </ion-label> -->
+              <ion-label>Reporting Today on: {{ formattedDate}} </ion-label>
+
+               
+
+
+                 <!-- <ion-datetime  displayFormat="MM/DD/YYYY"  [(ngModel)]="date" useCurrentTimeAsDefaultValue="true"></ion-datetime> -->
+
+
+             </ion-item>
+
 
          <!-- </form> -->
 
+
+
+
+
      </ion-list>
-     <button ion-button color="secondary" full (click)="reprtCase()" (click)="presentToast()">REPORT CASE</button>
+     <button ion-button color="secondary" full (click)="reprtCase()" (click)="resetFields()" (click)="presentToast()">REPORT CASE</button>
 
 
 
@@ -130,6 +172,19 @@
  -->
   </div>
 
-
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+        <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button>
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card> -->
+  <ion-list>
+    <ion-item *ngFor="let audio of audioList; index as i;">
+      <p>{{audio.filename}}</p>
+      <button ion-button clear item-end large (click)="playAudio(audio.filename, i)"><ion-icon name="play"></ion-icon></button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

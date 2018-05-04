@@ -2,7 +2,7 @@
 <ion-card>
   <ion-card-content>
     <ion-item no-lines   >
-      <ion-label floating>Email Address </ion-label>
+      <ion-label floating>Email  Address </ion-label>
       <ion-input  [(ngModel)]="account.email" type="email"></ion-input>
     </ion-item>
 
@@ -17,13 +17,15 @@
 
 
   </ion-col>
+
   <ion-col col-5>
-    <button ion-button color="secondary" (click)="registerPage()">Register</button>
+    <button ion-button outline color="secondary" (click)="registerPage()">Register!</button>
 
   </ion-col>
   <ion-col  col-5>
     <!-- <button ion-button color="primary" (click)="inboxPage('TabsPage')">Login</button> -->
-    <button ion-button color="primary" (click)="login()">Login</button>
+    <button ion-button color="danger" (click)="login()">Login</button>
+
 
   </ion-col>
   <ion-col col-2>

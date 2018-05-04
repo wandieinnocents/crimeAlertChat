@@ -2,7 +2,7 @@
 
 <ion-card>
   <ion-card-content>
-    <ion-item no-lines   >
+    <ion-item no-lines  >
       <ion-label floating>Email Address </ion-label>
       <ion-input  [(ngModel)]="account.email" type="email"></ion-input>
     </ion-item>
@@ -15,8 +15,9 @@
 </ion-card>
 <ion-row>
 
-  <ion-col>
-    <button ion-button full color="primary" (click)="registerPage('RegisterPage')">Register</button>
+  <ion-col  text-center>
+    <p style="font-size: 12px;"><i>(ie: You should have an internet connection</i></p>
+    <button ion-button full color="danger" (click)="registerPage('RegisterPage')" (click)="loginRedirect()" >Register</button>
 
   </ion-col>
 

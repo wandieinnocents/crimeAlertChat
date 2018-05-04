@@ -1,11 +1,18 @@
 import { Component,ViewChild, ElementRef} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,Platform } from 'ionic-angular';
 
 import { MediaCapture,MediaFile, CaptureError, CaptureImageOptions} from '@ionic-native/media-capture';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { ToastController,AlertController} from 'ionic-angular';
-import { Http, Headers, RequestOptions } from '@angular/http';
+
 import { Geolocation } from '@ionic-native/geolocation';
+
+import { Media, MediaObject } from '@ionic-native/media';
+//posting imports
+import { Http, Headers, RequestOptions } from '@angular/http';
+
+import { File } from '@ionic-native/file';
+import moment from 'moment'
 
 
 declare var google;
@@ -18,6 +25,12 @@ declare var google;
 
 })
 export class HomePage {
+  
+
+  public date : number   = Date.now();
+  currentDate;
+  formattedDate;
+
 
   //photo manipulation
   public photos : any;
@@ -26,16 +39,42 @@ export class HomePage {
   //data submission
 
   headline: string = '';
+  //active only
   category: string = '';
   what: string = '';
+  title: string = '';
+  description: string = '';
 
   where: string = '';
   why: string = '';
   who: string = '';
   how: string = '';
   when: string = '';
-  contact: string = '';
 
+  // date: String = new Date().toISOString();
+  date: String = new Date().toISOString();
+
+
+
+
+  //contact: string = '';
+
+//audio
+recording: boolean = false;
+filePath: string;
+fileName: string;
+audio: MediaObject;
+audioList: any[] = [];
+
+
+//audio x
+
+//test data here
+data = {}
+  // first_name: string = '';
+  // contact: string = '';
+  // location: string = '';
+  //
 
 
 @ViewChild('myvideo') myVideo: any;
@@ -46,6 +85,7 @@ export class HomePage {
 slideData: number[] = [];
 marker: any;
 latLng: string;
+myform: any;
 
 
   constructor(
@@ -54,15 +94,84 @@ latLng: string;
     private mediaCapture: MediaCapture,
     public toastCtrl: ToastController,
     private alertCtrl : AlertController,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private media: Media,
+    private file: File,
+     public http: Http,
+    public platform: Platform
 
 
 
   ) {
 
-
+    //current date  working now
+    this.currentDate = new Date();
+    this.getFormattedDate();
 
   }
+
+  getAudioList() {
+    if(localStorage.getItem("audiolist")) {
+      this.audioList = JSON.parse(localStorage.getItem("audiolist"));
+      console.log(this.audioList);
+    }
+  }
+
+
+
+  ionViewWillEnter() {
+    this.getAudioList();
+  }
+  startRecord() {
+    if (this.platform.is('ios')) {
+      this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
+      this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + this.fileName;
+      this.audio = this.media.create(this.filePath);
+    } else if (this.platform.is('android')) {
+      this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
+      this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + this.fileName;
+      this.audio = this.media.create(this.filePath);
+    }
+
+    this.audio.startRecord();
+    this.recording = true;
+  }
+
+  stopRecord() {
+    this.audio.stopRecord();
+    let data = { filename: this.fileName };
+    this.audioList.push(data);
+    localStorage.setItem("audiolist", JSON.stringify(this.audioList));
+    this.recording = false;
+    this.getAudioList();
+  }
+
+  playAudio(file,idx) {
+    if (this.platform.is('ios')) {
+      this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + file;
+      this.audio = this.media.create(this.filePath);
+    } else if (this.platform.is('android')) {
+      this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + file;
+      this.audio = this.media.create(this.filePath);
+    }
+    this.audio.play();
+    this.audio.setVolume(0.8);
+  }
+
+  //date function here working function
+  getFormattedDate(){
+
+    var dateObj = new Date();
+    var year = dateObj.getFullYear().toString();
+    var month = dateObj.getMonth().toString();
+    var date = dateObj.getDate().toString();
+
+   // var monthArray = ['Jan','Feb','Mar','April','May'];
+    var monthArray = ['1','2','3','4','5'];
+
+    this.formattedDate =  year + '-' + monthArray[month] + '-' + date;
+  }
+
   ionViewDidLoad(){
 
       // let loader = this.loadingCtrl.create({
@@ -119,6 +228,14 @@ latLng: string;
   ngOnInit() {
     this.photos = [];
   }
+  //form submission and reste
+
+  onSubmit() {
+    if (this.myform.valid) {
+      console.log("Form Submitted!");
+      this.myform.reset();
+    }
+  }
 
   deletePhoto(index) {
     let confirm = this.alertCtrl.create({
@@ -145,6 +262,7 @@ latLng: string;
   // takePhoto(){
   //
   // console.log("Take Photo");
+
   // }
 
   takePhoto() {
@@ -154,6 +272,7 @@ latLng: string;
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
+
     this.camera.getPicture(options) .then((imageData) => {
         this.base64Image = "data:image/jpeg;base64," + imageData;
         this.photos.push(this.base64Image);
@@ -194,6 +313,17 @@ latLng: string;
   //   this.slidesMoving = true;
   // }
 
+  resetFields(){
+
+    let title = this.title;
+    let description = this.description;
+
+    this.title = '';
+    this.description = '';
+
+  }
+
+
 //posting of data
 reprtCase()
 
@@ -208,15 +338,22 @@ reprtCase()
 
 
 
-                headline: this.headline,
-                category :this.category,
-                what :this.what,
-                where :this.where,
-                why :this.why,
-                who :this.who,
-                how :this.how,
-                when :this.when,
-                contact :this.contact
+                // headline: this.headline,
+                //category :this.category,
+                title :this.title,
+                description :this.description,
+                date: this.formattedDate
+
+                // latLng: this.latLng
+                // where :this.where,
+                // why :this.why,
+                // who :this.who,
+                // how :this.how,
+                // when :this.when,
+                // contact :this.contact
+
+
+
 
 
 
@@ -224,18 +361,18 @@ reprtCase()
 
             };
 
-        //      this.http.post("http://slickstars.com/api/feedback", data,options)
-        //   .subscribe(data => {
-        //     console.log(data['_body']);
-        //     // console.log(data);
-        //     // this.data = data._body;
-        //
-        //  }, error => {
-        //   console.log(error);// Error getting the data
-        // });
+             this.http.post("http://127.0.0.1:8000/api/crime", data,options)
+          .subscribe(data => {
+            console.log(data['_body']);
+            // console.log(data);
+            // this.data = data._body;
+
+         }, error => {
+          console.log(error);// Error getting the data
+        });
             console.log(data);
         //
-        //     this.http.post("http://slickstars.com/api/feedback", data,options);
+             this.http.post("http://127.0.0.1:8000/api/crime", data,options);
 
 }
 

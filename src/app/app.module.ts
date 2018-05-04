@@ -19,6 +19,15 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthService } from '../providers/auth/auth.service';
+import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+
+import { HttpModule } from '@angular/http';
+
+// import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -34,6 +43,7 @@ import { AuthService } from '../providers/auth/auth.service';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG)
   ],
@@ -54,6 +64,11 @@ import { AuthService } from '../providers/auth/auth.service';
     AngularFireAuth,
     Geolocation,
     AuthService,
+    Media,
+    File,
+    Transfer,
+    HttpModule,
+    File,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
 

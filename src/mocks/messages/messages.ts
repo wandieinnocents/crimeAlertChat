@@ -10,7 +10,7 @@ const messageList: Message[] = [];
 
 userList.forEach((user) => {
 
-  messageList.push({ user: user, date: new Date(),lastMessage: 'hello' })
+  messageList.push({ user: user, date: new Date(),lastMessage: 'Lets reduce crime rates..' })
 
 
 })

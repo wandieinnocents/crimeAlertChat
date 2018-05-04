@@ -13,19 +13,52 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
 
-  <ion-list>
-    <ion-item *ngFor="let message of messageList">
-      <ion-avatar item-left>
-        <img [src]="message.user.avatar">
-      </ion-avatar>
-      <h2>{{message.user.firstName + ' ' + message.user.lastName }}</h2>
-      <p>{{ message.lastMessage }}</p>
+
+
+ <ion-list>
+
+    <ion-item *ngFor="let post of posts"  style="background-color:#efeaea;" (click)="onViewTraffic()">
+
+        <ion-item style="background-color:#ebebeb;" text-wrap>
+          <ion-avatar item-start>
+            <!-- <img src="img/marty-avatar.png"> -->
+            <button ion-button icon-only class="image"><ion-icon name="car"></ion-icon></button>
+          </ion-avatar>
+          <h2>{{ post.road }}</h2>
+
+          <h3 style="font-size:10px;font-family:futura-pt, sans-serif;font-style: regular;font-weight: 500;">{{ post.created_at | date:"shortDate"}} -{{ post.created_at | date:"shortDate" | date:"shortTime"}}  {{ post.status}}</h3>
+            <p>{{ post.description }}</p>
+        </ion-item>
+
+
+
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="compass"></ion-icon>
+              <div>{{ post.starting_at }} </div>
+            </button>
+          </ion-col>
+
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="fastforward"></ion-icon>
+
+              <div>{{ post.ending_at }}</div>
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+
+
+      <!-- close test for feeds -->
+
 
     </ion-item>
 
   </ion-list>
-
 
 </ion-content>
