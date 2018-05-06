@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="danger">
-    <ion-title>Inbox</ion-title>
+    <ion-title>Posts</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,11 +19,11 @@
 
  <ion-list>
 
-    <ion-item *ngFor="let post of posts"  style="background-color:#efeaea;" (click)="onViewTraffic()">
+   <!--  <ion-item *ngFor="let post of posts"  style="background-color:#efeaea;" (click)="onViewTraffic()">
 
         <ion-item style="background-color:#ebebeb;" text-wrap>
           <ion-avatar item-start>
-            <!-- <img src="img/marty-avatar.png"> -->
+         
             <button ion-button icon-only class="image"><ion-icon name="car"></ion-icon></button>
           </ion-avatar>
           <h2>{{ post.road }}</h2>
@@ -52,13 +52,94 @@
 
         </ion-row>
 
+    </ion-item> -->
+ <ion-item *ngFor="let post of posts"  style="background-color:#efeaea;" (click)="onViewTraffic()">
 
 
-      <!-- close test for feeds -->
+ <ion-card>
+
+  <ion-item>
+    <ion-avatar item-start>
+      <!-- <img src="img/marty-avatar.png"> -->
+      <button ion-button icon-only class="image"><ion-icon name="people"></ion-icon></button>
+      
+    </ion-avatar>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.created_at | date:"shortDate"}} -{{ post.created_at | date:"shortDate" | date:"shortTime"}}</p>
+  </ion-item>
+
+  <!-- <img src="/assets/imgs/sample.jpg"> -->
+  <img src="{{ post.image }} ">
+
+  <ion-card-content>
+    <p>{{ post.description }}</p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <!-- <ion-icon name="thumbs-up"></ion-icon> -->
+        <div>POSTED</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <!-- <ion-icon name="text"></ion-icon> -->
+        <div>{{ post.created_at | date:"shortDate"}} -{{ post.created_at | date:"shortDate" | date:"shortTime"}}</div>
+      </button>
+    </ion-col>
+      
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12 Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>4 Comments</div>
+      </button>
+    </ion-col>
+    
+  </ion-row>
+
+</ion-card>
 
 
+        <!-- <ion-item style="background-color:#ebebeb;" text-wrap>
+          <ion-avatar item-start>
+         
+            <img src="{{ post.image }}">
+          </ion-avatar>
+          <h2>{{ post.title }}</h2>
+
+          <h3 style="font-size:10px;font-family:futura-pt, sans-serif;font-style: regular;font-weight: 500;">{{ post.created_at | date:"shortDate"}} -{{ post.created_at | date:"shortDate" | date:"shortTime"}}  {{ post.status}}</h3>
+          <p>{{ post.description }}</p>
+        </ion-item>
+
+
+
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="compass"></ion-icon>
+              <div>comment</div>
+            </button>
+          </ion-col>
+
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="fastforward"></ion-icon>
+
+              <div>share</div>
+            </button>
+          </ion-col>
+
+        </ion-row>
+ -->
     </ion-item>
-
   </ion-list>
 
 </ion-content>

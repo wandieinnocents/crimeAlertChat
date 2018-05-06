@@ -30,9 +30,9 @@ export class InboxPage {
     ) {
 
 
-  	this.http.get('http://slickstars.com/api/traffic_updates')
+  	this.http.get('http://127.0.0.1:8000/api/crime')
   	.map(res => res.json()).subscribe(data => {
-        this.posts = data.data;
+        this.posts = data;
 
     });
 

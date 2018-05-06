@@ -22,19 +22,24 @@
 
 <div #map  id="map"></div>
 <hr>
+<!-- creation of image upload new buttion  -->
+
+<img src="{{pathForImage(lastImage)}}" style="width: 100%">
+ 
+  <!-- <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3> -->
+
+<!-- creation of image upload new buttion  -->
 <!-- </ion-card> -->
 
 
 
 
-
+  
      <ion-list no-lines>
 
 
-      <!-- <ion-fab left bottom mini>
-      <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
-
-    </ion-fab>
+      
 
          <!-- <form> -->
 
@@ -52,12 +57,12 @@
                 </ion-fab>
                 <!-- end of recording -->
 
-                <ion-fab right  >
-                   <button ion-fab  color="primary"  (click)="takePhoto()"><ion-icon  name="camera"></ion-icon></button>
-                  </ion-fab>
-                   <!-- <button ion-fab><ion-icon  color="primary"  name="logo-vimeo"></ion-icon></button>
-                   <button ion-fab><ion-icon  color="primary"  name="logo-googleplus"></ion-icon></button> -->
-
+                <ion-fab right>
+                <button 
+                ion-fab  color="primary"  (click)="presentActionSheet()"><ion-icon  name="camera"></ion-icon>
+                </button>
+                </ion-fab>
+                   
 
 
                <br>
@@ -97,7 +102,8 @@
              <ion-item>
                  <ion-label floating>What is happening?</ion-label>
                  <!-- <ion-textarea [(ngModel)]="what" type="text" ></ion-textarea> -->
-                 <ion-textarea [(ngModel)]="description" type="text" ></ion-textarea>
+
+                 <ion-textarea [(ngModel)]="description" type="text" name="myForm" ></ion-textarea>
 
 
              </ion-item>
@@ -122,7 +128,7 @@
 
 
      </ion-list>
-     <button ion-button color="secondary" full (click)="reprtCase()" (click)="resetFields()" (click)="presentToast()">REPORT CASE</button>
+     <button ion-button color="secondary" full (click)="reprtCase()" (click)="resetFields()" (click)="presentToastReport()" (click)="validateForm()">REPORT CASE</button>
 
 
 
@@ -188,3 +194,16 @@
   </ion-list>
 
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <button ion-button icon-left (click)="presentActionSheet()">
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+      <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer> -->

@@ -65,7 +65,7 @@ import { HttpModule } from '@angular/http';
     Geolocation,
     AuthService,
     Media,
-    File,
+    FilePath,
     Transfer,
     HttpModule,
     File,
